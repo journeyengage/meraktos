@@ -12,14 +12,14 @@ const FooterSection = () => {
           </div>
           
           <div className="flex flex-col space-y-2 text-center md:text-right">
-            <a href="mailto:contato@meraktos.com.br" className="text-meraktos-goldLight hover:underline">
-              contato@meraktos.com.br
+            <a href="mailto:contato@meraktos.com" className="text-meraktos-goldLight hover:underline">
+              contato@meraktos.com
             </a>
-            <a href="https://wa.me/5500000000000" className="text-meraktos-goldLight hover:underline">
-              WhatsApp (XX) XXXX-XXXX
+            <a href="https://wa.me/5511999999999" className="text-meraktos-goldLight hover:underline">
+              WhatsApp (11) 99999-9999
             </a>
-            <a href="https://instagram.com/meraktosconsultoria" className="text-meraktos-goldLight hover:underline" target="_blank" rel="noopener noreferrer">
-              Instagram: @meraktosconsultoria
+            <a href="https://instagram.com/meraktos" className="text-meraktos-goldLight hover:underline" target="_blank" rel="noopener noreferrer">
+              Instagram: @meraktos
             </a>
           </div>
         </div>

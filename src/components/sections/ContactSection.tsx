@@ -23,7 +23,24 @@ const ContactSection = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
+    
+    // Apply phone mask to WhatsApp field
+    if (name === "whatsapp") {
+      const numericValue = value.replace(/\D/g, "");
+      let formattedValue = "";
+      
+      if (numericValue.length <= 2) {
+        formattedValue = numericValue;
+      } else if (numericValue.length <= 7) {
+        formattedValue = `(${numericValue.slice(0, 2)}) ${numericValue.slice(2)}`;
+      } else {
+        formattedValue = `(${numericValue.slice(0, 2)}) ${numericValue.slice(2, 7)}-${numericValue.slice(7, 11)}`;
+      }
+      
+      setFormState((prev) => ({ ...prev, whatsapp: formattedValue }));
+    } else {
+      setFormState((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -148,14 +165,14 @@ const ContactSection = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="message" className="text-meraktos-darkBlue">
-                  Mensagem adicional (opcional)
+                  Por que essa meta financeira é importante pra você?
                 </Label>
                 <Textarea
                   id="message"
                   name="message"
                   value={formState.message}
                   onChange={handleChange}
-                  placeholder="Se quiser, adicione mais informações aqui"
+                  placeholder="Conte um pouco sobre a importância dessa meta para você"
                   className="border-gray-300 focus:border-meraktos-goldLight focus:ring-meraktos-goldLight min-h-[100px]"
                 />
               </div>
@@ -166,7 +183,7 @@ const ContactSection = () => {
                   disabled={isSubmitting}
                   className="bg-meraktos-darkBlue text-white hover:bg-meraktos-goldLight hover:text-meraktos-darkBlue w-full md:w-auto md:px-12 py-6 text-lg font-medium transition-all duration-300"
                 >
-                  {isSubmitting ? "Enviando..." : "Enviar e começar agora"}
+                  {isSubmitting ? "Enviando..." : "Solicitar Análise"}
                 </Button>
               </div>
             </form>

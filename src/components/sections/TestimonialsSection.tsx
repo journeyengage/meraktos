@@ -12,7 +12,7 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       quote: "Achei que nunca sairia do aluguel. A Helena montou um plano comigo, buscou taxas melhores e em 6 meses eu estava com a chave na mão!",
-      author: "Luciana F., Recife/PE",
+      author: "Luciana F., São Paulo/SP",
     },
     {
       quote: "Depois de 5 anos tentando, finalmente consegui comprar meu carro com um financiamento justo e dentro das minhas possibilidades.",
@@ -20,11 +20,11 @@ const TestimonialsSection = () => {
     },
     {
       quote: "Eu estava afogada em dívidas e sem esperança. A orientação da Helena me ajudou a renegociar tudo e hoje estou respirando novamente.",
-      author: "Mariana S., Rio de Janeiro/RJ",
+      author: "Mariana S., São Paulo/SP",
     },
     {
       quote: "Como MEI, eu não conseguia crédito em lugar nenhum. A Helena encontrou soluções que nem sabia que existiam para o meu negócio.",
-      author: "Pedro A., Salvador/BA",
+      author: "Pedro A., São Paulo/SP",
     },
   ];
 
