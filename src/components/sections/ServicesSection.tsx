@@ -15,8 +15,8 @@ const ServicesSection = () => {
     "Empréstimo consignado",
     "Renegociação de dívidas",
     "Planejamento financeiro simples",
-    "EMPRÉSTIMOS",
-    "REFINANCIAMENTO DE VEÍCULOS",
+    "Empréstimos",
+    "Refinanciamento de Veículos",
   ];
 
   const businessServices = [
@@ -24,12 +24,12 @@ const ServicesSection = () => {
     "Capital de giro",
     "Desconto de recebíveis",
     "Renegociação com bancos",
-    "Consultoria para MEI",
+    "Consultoria Financeira para MEI",
     "Consórcios e seguros empresariais",
-    "LINHAS BNDES",
+    "Linhas BNDES",
     "FGI",
     "FINAME",
-    "AUTO EQUITY (CRÉDITO COM GARANTIA DE VEÍCULOS OU REFINANCIAMENTO)",
+    "Auto Equity (Crédito com garantia em veículos)",
   ];
 
   return (

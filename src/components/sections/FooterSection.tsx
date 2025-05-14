@@ -15,8 +15,8 @@ const FooterSection = () => {
             <a href="mailto:contato@meraktos.com" className="text-meraktos-goldLight hover:underline">
               contato@meraktos.com
             </a>
-            <a href="https://wa.me/5511999999999" className="text-meraktos-goldLight hover:underline">
-              WhatsApp (11) 99999-9999
+            <a href="https://wa.me/5511932990106" className="text-meraktos-goldLight hover:underline">
+              WhatsApp (11) 93299-0106
             </a>
             <a href="https://instagram.com/meraktos" className="text-meraktos-goldLight hover:underline" target="_blank" rel="noopener noreferrer">
               Instagram: @meraktos

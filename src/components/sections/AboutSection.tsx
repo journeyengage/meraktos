@@ -11,16 +11,16 @@ const AboutSection = () => {
             </h2>
             <div className="space-y-4 text-gray-700">
               <p className="text-lg">
-                Sou <strong>Helena Santos</strong>, consultora financeira com 15 anos de experiência (13 anos no Santander, 2 no Itaú).
+                <strong>Helena Santos</strong>, consultora financeira com 15 anos de experiência no mercado bancário.
               </p>
               <p className="text-lg">
-                Hoje sou <strong>Personal Banker pela Franq</strong>, e ajudo pessoas como você a conquistar a casa própria, financiar um carro ou reorganizar a vida financeira.
+                <strong>Personal Banker</strong> e ajudo pessoas como você a reorganizar a vida financeira, financiar um carro ou até mesmo conquistar a tão sonhada casa própria.
               </p>
               <p className="text-lg">
-                Já atendi desde quem estava sem crédito até quem assinou o primeiro contrato de imóvel.
+                Ajudo desde a limpar o nome até assinar contrato do seu primeiro imóvel.
               </p>
               <p className="text-lg">
-                E sim, sou a <strong>Severina das Finanças</strong>: faço um pouco de tudo, e faço com alma.
+                Pode me chamar de a  <strong>"Severina das Finanças"</strong>: faço um pouco de tudo, mas faço tudo com alma.
               </p>
             </div>
           </div>
