@@ -7,7 +7,13 @@ const FooterSection = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="mb-8 md:mb-0">
-            <h2 className="text-2xl font-bold mb-2">Meraktos Consultoria</h2>
+            <div className="mb-4">
+              <img 
+                src="/lovable-uploads/11a52c8f-9d88-4879-8436-c7256c84ff26.png" 
+                alt="Meraktos Consultoria" 
+                className="h-16" 
+              />
+            </div>
             <p className="opacity-80">Transformando sonhos em realidade financeira</p>
           </div>
           

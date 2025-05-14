@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -41,6 +42,10 @@ const ContactSection = () => {
     } else {
       setFormState((prev) => ({ ...prev, [name]: value }));
     }
+  };
+
+  const handleBudgetChange = (value: string) => {
+    setFormState((prev) => ({ ...prev, budget: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -153,14 +158,20 @@ const ContactSection = () => {
                 <Label htmlFor="budget" className="text-meraktos-darkBlue">
                   Quanto você está disposto(a) a investir para alcançá-la?
                 </Label>
-                <Input
-                  id="budget"
-                  name="budget"
-                  value={formState.budget}
-                  onChange={handleChange}
-                  placeholder="Seu orçamento ou investimento planejado"
-                  className="border-gray-300 focus:border-meraktos-goldLight focus:ring-meraktos-goldLight"
-                />
+                <Select value={formState.budget} onValueChange={handleBudgetChange}>
+                  <SelectTrigger className="w-full border-gray-300 focus:border-meraktos-goldLight focus:ring-meraktos-goldLight">
+                    <SelectValue placeholder="Selecione uma faixa de investimento" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Até R$100">Até R$100</SelectItem>
+                    <SelectItem value="De R$101 a R$300">De R$101 a R$300</SelectItem>
+                    <SelectItem value="De R$301 a R$500">De R$301 a R$500</SelectItem>
+                    <SelectItem value="De R$501 a R$1.000">De R$501 a R$1.000</SelectItem>
+                    <SelectItem value="De R$1.001 a R$2.000">De R$1.001 a R$2.000</SelectItem>
+                    <SelectItem value="Acima de R$2.000">Acima de R$2.000</SelectItem>
+                    <SelectItem value="Ainda não sei / Preciso de orientação">Ainda não sei / Preciso de orientação</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2">

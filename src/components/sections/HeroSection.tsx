@@ -13,6 +13,13 @@ const HeroSection = () => {
     <section className="hero-section relative min-h-[90vh] flex items-center">
       <div className="hero-overlay absolute inset-0"></div>
       <div className="container mx-auto px-4 relative z-10 text-center py-20">
+        <div className="mb-10">
+          <img 
+            src="/lovable-uploads/65b85966-9868-4a09-a761-e2be60cf4609.png" 
+            alt="Meraktos Consultoria" 
+            className="max-h-24 mx-auto"
+          />
+        </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
           Crédito que transforma.{" "}
           <span className="block">Realize o que parecia distante.</span>
