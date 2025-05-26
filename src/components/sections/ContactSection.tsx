@@ -48,12 +48,33 @@ const ContactSection = () => {
     setFormState((prev) => ({ ...prev, budget: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    // Prepare data for webhook
+    const payload = {
+      nome_completo: formState.name,
+      email: formState.email,
+      whatsapp: formState.whatsapp,
+      meta_financeira: formState.goal,
+      investimento_planejado: formState.budget,
+      porque_importante: formState.message
+    };
+
+    try {
+      const response = await fetch("https://n8n.main.santto.co/webhook-test/meraktos-webform", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro na resposta do servidor");
+      }
+
       setIsSubmitting(false);
       setIsSuccess(true);
       toast({
@@ -72,7 +93,15 @@ const ContactSection = () => {
       
       // Reset success message after 5 seconds
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1000);
+    } catch (error) {
+      console.error("Erro ao enviar dados:", error);
+      setIsSubmitting(false);
+      toast({
+        title: "Erro ao enviar dados",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
