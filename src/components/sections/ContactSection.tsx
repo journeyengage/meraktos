@@ -63,7 +63,7 @@ const ContactSection = () => {
     };
 
     try {
-      const response = await fetch("https://n8n.main.santto.co/webhook-test/meraktos-webform", {
+      const response = await fetch("https://n8n.hook.santto.co/webhook/meraktos-webform", {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=UTF-8"
@@ -79,7 +79,7 @@ const ContactSection = () => {
       setIsSuccess(true);
       toast({
         title: "Mensagem enviada com sucesso!",
-        description: "Em até 24h entraremos em contato pelo seu WhatsApp. Vamos realizar?",
+        description: "Em até 24h entraremos em contato pelo seu WhatsApp.",
       });
       
       setFormState({
