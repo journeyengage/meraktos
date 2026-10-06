@@ -1,8 +1,9 @@
-import { useRef, useState, type FormEvent } from "react";
-import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
 import {
   OBJETIVOS,
-  PARCELAS,
+  PERFIS,
+  VALORES,
   formatarCelular,
   linkWhatsApp,
   mensagemDoVisitante,
@@ -10,10 +11,13 @@ import {
 } from "../lib/lead.js";
 import { IconeWhatsApp } from "./IconeWhatsApp";
 
-type Campos = { nome: string; whatsapp: string; objetivo: string; parcela: string; mensagem: string; site: string };
-type Erros = Partial<Record<"nome" | "whatsapp" | "objetivo" | "parcela", string>>;
+type Perfil = keyof typeof OBJETIVOS;
+type Campos = { nome: string; whatsapp: string; perfil: string; empresa: string; objetivo: string; valor: string; mensagem: string; site: string };
+type CampoComErro = "nome" | "whatsapp" | "perfil" | "objetivo" | "valor";
+type Erros = Partial<Record<CampoComErro, string>>;
+export type Preselecao = { perfil: Perfil; objetivo: string; vez: number };
 
-const VAZIO: Campos = { nome: "", whatsapp: "", objetivo: "", parcela: "", mensagem: "", site: "" };
+const VAZIO: Campos = { nome: "", whatsapp: "", perfil: "", empresa: "", objetivo: "", valor: "", mensagem: "", site: "" };
 const ESPERA_AVISO_MS = 2500;
 
 // Avisa a Helena pela Iris sem segurar o visitante: se a função demorar ou falhar,
@@ -34,17 +38,47 @@ async function avisarHelena(corpo: object) {
   }
 }
 
-export function Formulario() {
+function Erro({ campo, erros }: { campo: CampoComErro; erros: Erros }) {
+  if (!erros[campo]) return null;
+  return <p id={`erro-${campo}`} className="mt-2 text-sm font-medium text-red-700">{erros[campo]}</p>;
+}
+
+function Opcao({ nome, valor, marcado, aoMarcar, children }: { nome: string; valor: string; marcado: boolean; aoMarcar: (v: string) => void; children: string }) {
+  return (
+    <label className="cursor-pointer">
+      <input type="radio" name={nome} value={valor} checked={marcado} onChange={(e) => aoMarcar(e.target.value)} className="peer sr-only" />
+      <span className="flex min-h-12 items-center justify-between gap-3 border border-tinta/15 px-4 py-3 text-[15px] transition-colors hover:border-noite-700 peer-checked:border-noite-900 peer-checked:bg-noite-900 peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-noite-900">
+        {children}
+        <Check className={`h-4 w-4 shrink-0 text-ouro-claro ${marcado ? "opacity-100" : "opacity-0"}`} aria-hidden />
+      </span>
+    </label>
+  );
+}
+
+export function Formulario({ preselecao }: { preselecao: Preselecao | null }) {
   const [campos, setCampos] = useState<Campos>(VAZIO);
   const [erros, setErros] = useState<Erros>({});
   const [estado, setEstado] = useState<"editando" | "enviando" | "pronto">("editando");
   const [destino, setDestino] = useState("");
+  const [realce, setRealce] = useState(0);
   const inicio = useRef(Date.now());
   const form = useRef<HTMLFormElement>(null);
 
+  // Clique numa operação da página: o formulário já chega com perfil e operação escolhidos.
+  useEffect(() => {
+    if (!preselecao) return;
+    setCampos((atual) => ({ ...atual, perfil: preselecao.perfil, objetivo: preselecao.objetivo }));
+    setErros((atual) => ({ ...atual, perfil: undefined, objetivo: undefined }));
+    setRealce(preselecao.vez);
+  }, [preselecao]);
+
   function alterar(nome: keyof Campos, valor: string) {
-    setCampos((atual) => ({ ...atual, [nome]: nome === "whatsapp" ? formatarCelular(valor) : valor }));
-    if (erros[nome as keyof Erros]) setErros((atual) => ({ ...atual, [nome]: undefined }));
+    setCampos((atual) => {
+      const novo = { ...atual, [nome]: nome === "whatsapp" ? formatarCelular(valor) : valor };
+      if (nome === "perfil" && valor !== atual.perfil) novo.objetivo = "";
+      return novo;
+    });
+    if (nome in erros) setErros((atual) => ({ ...atual, [nome]: undefined }));
   }
 
   async function enviar(evento: FormEvent) {
@@ -66,74 +100,90 @@ export function Formulario() {
 
   if (estado === "pronto") {
     return (
-      <div className="rounded-3xl bg-paper p-6 text-ink sm:p-8" role="status" aria-live="polite">
-        <CheckCircle2 className="h-10 w-10 text-gold-700" aria-hidden />
-        <h3 className="mt-4 text-2xl font-medium">Pedido pronto no WhatsApp</h3>
-        <p className="mt-3 text-ink-soft">
-          Abrimos a conversa com a Helena e o seu pedido já está escrito. É só tocar em enviar. Ela responde em até 24 horas.
+      <div className="bg-white p-6 text-tinta sm:p-10" role="status" aria-live="polite">
+        <span className="flex h-12 w-12 items-center justify-center bg-noite-900 text-ouro-claro">
+          <Check className="h-6 w-6" aria-hidden />
+        </span>
+        <h3 className="mt-6 text-3xl font-semibold tracking-tight">Solicitação pronta no WhatsApp</h3>
+        <p className="mt-3 max-w-md text-tinta-suave">
+          Abrimos a conversa com a Helena e o seu pedido já está escrito. Toque em enviar para começar a análise.
         </p>
-        <a href={destino} className="btn mt-6 w-full bg-navy-900 text-white hover:bg-navy-800 sm:w-auto">
-          <IconeWhatsApp className="h-5 w-5" /> O WhatsApp não abriu? Toque aqui
+        <a href={destino} className="btn-noite mt-8 w-full sm:w-auto">
+          <IconeWhatsApp className="h-5 w-5 text-ouro-claro" /> Abrir o WhatsApp de novo
         </a>
       </div>
     );
   }
 
   const enviando = estado === "enviando";
-  const descricao = (campo: keyof Erros) => (erros[campo] ? `erro-${campo}` : undefined);
+  const descricao = (campo: CampoComErro) => (erros[campo] ? `erro-${campo}` : undefined);
+  const perfil = campos.perfil as Perfil | "";
+  const operacoes = perfil ? OBJETIVOS[perfil] : [];
 
   return (
-    <form ref={form} onSubmit={enviar} noValidate className="rounded-3xl bg-paper p-5 text-ink shadow-2xl shadow-black/30 sm:p-8">
-      <div className="grid gap-5">
-        <div>
-          <label htmlFor="nome" className="mb-1.5 block font-semibold">Seu nome</label>
-          <input id="nome" name="nome" className="campo" autoComplete="name" value={campos.nome}
-            onChange={(e) => alterar("nome", e.target.value)} aria-invalid={!!erros.nome} aria-describedby={descricao("nome")} />
-          {erros.nome && <p id="erro-nome" className="mt-1.5 text-sm font-medium text-red-700">{erros.nome}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="whatsapp" className="mb-1.5 block font-semibold">Seu WhatsApp</label>
-          <input id="whatsapp" name="whatsapp" className="campo" type="tel" inputMode="numeric" autoComplete="tel-national"
-            placeholder="(11) 90000-0000" value={campos.whatsapp} onChange={(e) => alterar("whatsapp", e.target.value)}
-            aria-invalid={!!erros.whatsapp} aria-describedby={descricao("whatsapp")} />
-          {erros.whatsapp && <p id="erro-whatsapp" className="mt-1.5 text-sm font-medium text-red-700">{erros.whatsapp}</p>}
-        </div>
-
-        <fieldset aria-describedby={descricao("objetivo")}>
-          <legend className="mb-2 font-semibold">O que você quer destravar?</legend>
-          <div className="flex flex-wrap gap-2">
-            {OBJETIVOS.map((objetivo) => (
-              <label key={objetivo} className="cursor-pointer">
-                <input type="radio" name="objetivo" value={objetivo} checked={campos.objetivo === objetivo}
-                  onChange={(e) => alterar("objetivo", e.target.value)} className="peer sr-only" />
-                <span className="inline-flex min-h-11 items-center rounded-full border border-ink/15 bg-white px-4 text-[15px] font-medium transition-colors peer-checked:border-navy-900 peer-checked:bg-navy-900 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-gold-400 peer-focus-visible:ring-offset-2">
-                  {objetivo}
-                </span>
-              </label>
+    <form id="formulario-analise" ref={form} onSubmit={enviar} noValidate className="relative bg-white p-5 text-tinta sm:p-10">
+      <div className="grid gap-9">
+        <fieldset aria-describedby={descricao("perfil")}>
+          <legend className="rotulo mb-3">O crédito é para</legend>
+          <div className="grid grid-cols-2 gap-2">
+            {PERFIS.map((p) => (
+              <Opcao key={p} nome="perfil" valor={p} marcado={campos.perfil === p} aoMarcar={(v) => alterar("perfil", v)}>{p}</Opcao>
             ))}
           </div>
-          {erros.objetivo && <p id="erro-objetivo" className="mt-1.5 text-sm font-medium text-red-700">{erros.objetivo}</p>}
+          <Erro campo="perfil" erros={erros} />
         </fieldset>
 
-        <div>
-          <label htmlFor="parcela" className="mb-1.5 block font-semibold">Quanto cabe por mês no seu bolso?</label>
-          <select id="parcela" name="parcela" className="campo appearance-none bg-[length:20px] bg-[right_1rem_center] bg-no-repeat pr-10"
-            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2314202E' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
-            value={campos.parcela} onChange={(e) => alterar("parcela", e.target.value)}
-            aria-invalid={!!erros.parcela} aria-describedby={descricao("parcela")}>
-            <option value="" disabled>Escolha uma faixa</option>
-            {PARCELAS.map((parcela) => <option key={parcela} value={parcela}>{parcela}</option>)}
+        <div key={realce} className={realce ? "-m-2 animate-realce p-2" : undefined}>
+          <label htmlFor="objetivo" className="rotulo">Operação</label>
+          <select id="objetivo" name="objetivo" disabled={!perfil}
+            className="campo cursor-pointer appearance-none bg-[length:18px] bg-[right_0.25rem_center] bg-no-repeat pr-8 disabled:cursor-not-allowed disabled:text-tinta-suave/60"
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230A1628' stroke-width='1.6'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
+            value={campos.objetivo} onChange={(e) => alterar("objetivo", e.target.value)}
+            aria-invalid={!!erros.objetivo} aria-describedby={descricao("objetivo")}>
+            <option value="" disabled>{perfil ? "Escolha a operação" : "Primeiro, escolha o perfil"}</option>
+            {operacoes.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
-          {erros.parcela && <p id="erro-parcela" className="mt-1.5 text-sm font-medium text-red-700">{erros.parcela}</p>}
+          <Erro campo="objetivo" erros={erros} />
         </div>
 
+        <fieldset aria-describedby={descricao("valor")}>
+          <legend className="rotulo mb-3">Valor aproximado</legend>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {VALORES.map((v) => (
+              <Opcao key={v} nome="valor" valor={v} marcado={campos.valor === v} aoMarcar={(x) => alterar("valor", x)}>{v}</Opcao>
+            ))}
+          </div>
+          <Erro campo="valor" erros={erros} />
+        </fieldset>
+
+        <div className="grid gap-9 sm:grid-cols-2 sm:gap-6">
+          <div>
+            <label htmlFor="nome" className="rotulo">Seu nome</label>
+            <input id="nome" name="nome" className="campo" autoComplete="name" value={campos.nome}
+              onChange={(e) => alterar("nome", e.target.value)} aria-invalid={!!erros.nome} aria-describedby={descricao("nome")} />
+            <Erro campo="nome" erros={erros} />
+          </div>
+          <div>
+            <label htmlFor="whatsapp" className="rotulo">WhatsApp</label>
+            <input id="whatsapp" name="whatsapp" className="campo tabular" type="tel" inputMode="numeric" autoComplete="tel-national"
+              placeholder="(11) 90000-0000" value={campos.whatsapp} onChange={(e) => alterar("whatsapp", e.target.value)}
+              aria-invalid={!!erros.whatsapp} aria-describedby={descricao("whatsapp")} />
+            <Erro campo="whatsapp" erros={erros} />
+          </div>
+        </div>
+
+        {perfil === "Empresa" && (
+          <div>
+            <label htmlFor="empresa" className="rotulo">Empresa <span className="font-normal normal-case tracking-normal">(opcional)</span></label>
+            <input id="empresa" name="empresa" className="campo" autoComplete="organization" maxLength={80}
+              value={campos.empresa} onChange={(e) => alterar("empresa", e.target.value)} />
+          </div>
+        )}
+
         <div>
-          <label htmlFor="mensagem" className="mb-1.5 block font-semibold">
-            Conte um pouco do seu caso <span className="font-normal text-ink-soft">(opcional)</span>
-          </label>
-          <textarea id="mensagem" name="mensagem" rows={3} maxLength={600} className="campo resize-y"
-            placeholder="Ex.: quero sair do aluguel e não sei se meu nome está limpo"
+          <label htmlFor="mensagem" className="rotulo">Contexto da operação <span className="font-normal normal-case tracking-normal">(opcional)</span></label>
+          <textarea id="mensagem" name="mensagem" rows={2} maxLength={600} className="campo resize-y"
+            placeholder="Ex.: expansão da fábrica, prazo de 60 meses, imóvel livre como garantia"
             value={campos.mensagem} onChange={(e) => alterar("mensagem", e.target.value)} />
         </div>
 
@@ -143,14 +193,16 @@ export function Formulario() {
           <input id="site" name="site" tabIndex={-1} autoComplete="off" value={campos.site} onChange={(e) => alterar("site", e.target.value)} />
         </div>
 
-        <button type="submit" disabled={enviando} className="btn w-full bg-navy-900 text-white hover:bg-navy-800 disabled:opacity-80">
-          {enviando ? <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> : <IconeWhatsApp className="h-5 w-5 text-gold-400" />}
-          {enviando ? "Abrindo o WhatsApp…" : "Enviar pelo WhatsApp"}
-          {!enviando && <ArrowRight className="h-5 w-5" aria-hidden />}
-        </button>
-        <p className="text-center text-sm text-ink-soft">
-          Seu pedido abre no WhatsApp da Helena já escrito. Sem custo e sem compromisso.
-        </p>
+        <div>
+          <button type="submit" disabled={enviando} className="btn-noite w-full disabled:cursor-wait disabled:opacity-80">
+            {enviando ? <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> : <IconeWhatsApp className="h-5 w-5 text-ouro-claro" />}
+            <span>{enviando ? "Abrindo o WhatsApp…" : <>Enviar<span className="hidden sm:inline"> solicitação</span> pelo WhatsApp</>}</span>
+            {!enviando && <ArrowRight className="h-5 w-5" aria-hidden />}
+          </button>
+          <p className="mt-4 text-sm text-tinta-suave">
+            A solicitação abre no WhatsApp da Helena já escrita. A análise inicial não tem custo.
+          </p>
+        </div>
       </div>
     </form>
   );

@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 .vercel
 .env*
+
+# impeccable: artefatos de rodada (capturas, respostas, mocks)
+.impeccable/review/
+.impeccable/questions/
+.impeccable/mocks/
+.impeccable/build/

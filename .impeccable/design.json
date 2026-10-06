@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-06T00:00:00Z",
+  "title": "Design System: Crédito com Helena · Meraktos Consultoria",
+  "extensions": {
+    "colorMeta": {
+      "noite-950": {
+        "role": "primary",
+        "displayName": "Azul-Noite Profundo",
+        "tonalRamp": [
+          "#050B15",
+          "#0A1628",
+          "#10223D",
+          "#1B3354",
+          "#5E7391",
+          "#A9B6C9"
+        ]
+      },
+      "noite-900": {
+        "role": "primary",
+        "displayName": "Azul-Noite Institucional",
+        "tonalRamp": [
+          "#050B15",
+          "#0A1628",
+          "#10223D",
+          "#1B3354",
+          "#5E7391",
+          "#A9B6C9"
+        ]
+      },
+      "noite-700": {
+        "role": "primary",
+        "displayName": "Azul-Noite Médio",
+        "tonalRamp": [
+          "#050B15",
+          "#0A1628",
+          "#10223D",
+          "#1B3354",
+          "#5E7391",
+          "#A9B6C9"
+        ]
+      },
+      "noite-500": {
+        "role": "primary",
+        "displayName": "Azul-Ardósia",
+        "tonalRamp": [
+          "#050B15",
+          "#0A1628",
+          "#10223D",
+          "#1B3354",
+          "#5E7391",
+          "#A9B6C9"
+        ]
+      },
+      "noite-300": {
+        "role": "primary",
+        "displayName": "Névoa Azul",
+        "tonalRamp": [
+          "#050B15",
+          "#0A1628",
+          "#10223D",
+          "#1B3354",
+          "#5E7391",
+          "#A9B6C9"
+        ]
+      },
+      "ouro": {
+        "role": "secondary",
+        "displayName": "Ouro Meraktos",
+        "canonical": "oklch(73.6% 0.100 83)",
+        "tonalRamp": [
+          "#3A2A0E",
+          "#5A4419",
+          "#8A6A2A",
+          "#A8853F",
+          "#C8A45C",
+          "#D6B672",
+          "#E3C887",
+          "#F3E6C6"
+        ]
+      },
+      "ouro-claro": {
+        "role": "secondary",
+        "displayName": "Ouro Claro",
+        "canonical": "oklch(73.6% 0.100 83)",
+        "tonalRamp": [
+          "#3A2A0E",
+          "#5A4419",
+          "#8A6A2A",
+          "#A8853F",
+          "#C8A45C",
+          "#D6B672",
+          "#E3C887",
+          "#F3E6C6"
+        ]
+      },
+      "ouro-escuro": {
+        "role": "secondary",
+        "displayName": "Ouro Envelhecido",
+        "canonical": "oklch(73.6% 0.100 83)",
+        "tonalRamp": [
+          "#3A2A0E",
+          "#5A4419",
+          "#8A6A2A",
+          "#A8853F",
+          "#C8A45C",
+          "#D6B672",
+          "#E3C887",
+          "#F3E6C6"
+        ]
+      },
+      "branco": {
+        "role": "neutral",
+        "displayName": "Branco"
+      },
+      "gelo": {
+        "role": "neutral",
+        "displayName": "Gelo",
+        "canonical": "oklch(96.6% 0.005 258)",
+        "tonalRamp": [
+          "#0A0B0D",
+          "#232426",
+          "#3E4042",
+          "#5C5E60",
+          "#7C7D80",
+          "#9D9EA1",
+          "#C2C4C7",
+          "#EDEFF2"
+        ]
+      },
+      "gelo-linha": {
+        "role": "neutral",
+        "displayName": "Fio Gelo",
+        "canonical": "oklch(89.9% 0.014 258)",
+        "tonalRamp": [
+          "#080B11",
+          "#20242B",
+          "#3B4047",
+          "#595E66",
+          "#787E86",
+          "#999FA7",
+          "#BFC5CD",
+          "#E9EFF8"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "oklch(19.2% 0.035 261)",
+        "tonalRamp": [
+          "#040B1A",
+          "#1A2435",
+          "#354053",
+          "#535E72",
+          "#727E93",
+          "#929FB5",
+          "#B8C5DC",
+          "#E1EFFF"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Tinta Suave",
+        "canonical": "oklch(44.9% 0.044 258)",
+        "tonalRamp": [
+          "#020B1D",
+          "#162439",
+          "#314057",
+          "#4E5F77",
+          "#6D7E98",
+          "#8EA0BB",
+          "#B3C6E1",
+          "#DDF0FF"
+        ]
+      },
+      "erro": {
+        "role": "neutral",
+        "displayName": "Erro",
+        "canonical": "oklch(50.5% 0.190 28)",
+        "tonalRamp": [
+          "#2C0000",
+          "#540000",
+          "#7E0003",
+          "#AB1D1C",
+          "#D4433B",
+          "#F27164",
+          "#FF9F92",
+          "#FFD1C4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Só o título da abertura, condensado (wdth 70), ~15ch por linha."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de seção, condensados, medida 12–18ch, text-wrap balance."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Títulos de etapa e de coluna (colunas de operações em wdth 80)."
+      },
+      "title-sm": {
+        "displayName": "Title pequeno",
+        "purpose": "Princípios da tese e nomes de operação."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Números de prova em algarismos tabulares, Ouro Envelhecido sobre claro."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Parágrafo de abertura de seção, medida 44–60ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido."
+      },
+      "body-sm": {
+        "displayName": "Body pequeno",
+        "purpose": "Navegação, descrições de operação, listas e rodapé."
+      },
+      "field": {
+        "displayName": "Campo",
+        "purpose": "Texto digitado; 17px evita zoom no iOS."
+      },
+      "button": {
+        "displayName": "Botão",
+        "purpose": "Rótulo de todos os botões."
+      },
+      "label": {
+        "displayName": "Rótulo",
+        "purpose": "Só rótulos de campo do formulário, em caixa-alta."
+      }
+    },
+    "shadows": [],
+    "overlays": [
+      {
+        "name": "veu-abertura-desktop",
+        "value": "linear-gradient(90deg, rgba(5,11,21,0.94) 0%, rgba(5,11,21,0.74) 45%, rgba(5,11,21,0.12) 100%)",
+        "purpose": "Véu azul-noite sobre a foto da abertura, da esquerda (≥768px)."
+      },
+      {
+        "name": "veu-abertura-mobile",
+        "value": "linear-gradient(0deg, rgba(5,11,21,0.97) 0%, rgba(5,11,21,0.82) 52%, rgba(5,11,21,0.15) 100%)",
+        "purpose": "Véu de baixo para cima no celular."
+      },
+      {
+        "name": "tinta-multiplicada",
+        "value": "rgba(10,22,40,0.3) mix-blend-mode:multiply",
+        "purpose": "Camada sob o véu que esfria a foto."
+      }
+    ],
+    "focus": {
+      "value": "outline: 2px solid #C8A45C; outline-offset: 3px",
+      "purpose": "Foco global. Sobre branco fica ~2.3:1 (abaixo de 3:1); lacuna conhecida, não regra."
+    },
+    "motion": [
+      {
+        "name": "ease-assentar",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Curva única de desaceleração longa para entradas e realce."
+      },
+      {
+        "name": "assentar",
+        "value": "scale(1.07) → scale(1), 2.6s",
+        "purpose": "Foto da abertura assentando ao carregar."
+      },
+      {
+        "name": "subir",
+        "value": "translateY(18px) → 0, 1.1s",
+        "purpose": "Título da abertura."
+      },
+      {
+        "name": "realce",
+        "value": "background rgba(200,164,92,0.28) → transparente, 1.6s",
+        "purpose": "Confirma a operação preenchida no formulário."
+      },
+      {
+        "name": "estado",
+        "value": "300ms (cores de botão, seta da linha); 150ms (cores de links e opções)",
+        "purpose": "Transições de hover."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "durações 0.01ms; scroll-behavior auto",
+        "purpose": "Respeita prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
+        "name": "container-max",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão claro",
+      "kind": "button",
+      "refersTo": "button-claro",
+      "description": "Ação primária sobre fundo azul-noite (abertura e cabeçalho).",
+      "html": "<div class=\"ds-noite-bg\"><a href=\"#\" class=\"ds-btn-claro\">Solicitar análise <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a></div>",
+      "css": ".ds-noite-bg{background:#050B15;padding:32px;} .ds-btn-claro{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 24px; font-family:Archivo, system-ui, sans-serif; font-size:15px; font-weight:600; letter-spacing:0.01em; border-radius:0; cursor:pointer; text-decoration:none; transition:background-color .3s, color .3s, border-color .3s; background:#FFFFFF; color:#050B15; border:0;} .ds-btn-claro:hover{background:#F2F4F7;} .ds-btn-claro:focus-visible{outline:2px solid #C8A45C; outline-offset:3px;}"
+    },
+    {
+      "name": "Botão de contorno",
+      "kind": "button",
+      "refersTo": "button-contorno",
+      "description": "Ação secundária sobre azul-noite; hover em ouro claro.",
+      "html": "<div class=\"ds-noite-bg2\"><a href=\"#\" class=\"ds-btn-contorno\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12.05.67C5.78.67.67 5.78.67 12.05c0 2 .52 3.96 1.52 5.69L.57 23.67l6.06-1.59a11.35 11.35 0 0 0 5.42 1.38c6.27 0 11.38-5.1 11.38-11.38S18.32.67 12.05.67Zm5.42 13.71c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49 2.48 1.07 3 .86 3.56.81.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z\"/></svg> Conversar no WhatsApp</a></div>",
+      "css": ".ds-noite-bg2{background:#050B15;padding:32px;} .ds-btn-contorno{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 24px; font-family:Archivo, system-ui, sans-serif; font-size:15px; font-weight:600; letter-spacing:0.01em; border-radius:0; cursor:pointer; text-decoration:none; transition:background-color .3s, color .3s, border-color .3s; background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.3);} .ds-btn-contorno:hover{border-color:#E3C887; color:#E3C887;} .ds-btn-contorno:focus-visible{outline:2px solid #C8A45C; outline-offset:3px;}"
+    },
+    {
+      "name": "Botão noite",
+      "kind": "button",
+      "refersTo": "button-noite",
+      "description": "Ação primária sobre fundo claro: envio do formulário pelo WhatsApp.",
+      "html": "<button type=\"button\" class=\"ds-btn-noite\"><span class=\"ds-btn-noite-ico\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12.05.67C5.78.67.67 5.78.67 12.05c0 2 .52 3.96 1.52 5.69L.57 23.67l6.06-1.59a11.35 11.35 0 0 0 5.42 1.38c6.27 0 11.38-5.1 11.38-11.38S18.32.67 12.05.67Zm5.42 13.71c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49 2.48 1.07 3 .86 3.56.81.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z\"/></svg></span> Enviar solicitação pelo WhatsApp <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-noite{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 24px; font-family:Archivo, system-ui, sans-serif; font-size:15px; font-weight:600; letter-spacing:0.01em; border-radius:0; cursor:pointer; text-decoration:none; transition:background-color .3s, color .3s, border-color .3s; background:#0A1628; color:#FFFFFF; border:0;} .ds-btn-noite:hover{background:#1B3354;} .ds-btn-noite:focus-visible{outline:2px solid #C8A45C; outline-offset:3px;} .ds-btn-noite-ico{display:inline-flex; color:#E3C887;}"
+    },
+    {
+      "name": "Campo com rótulo",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Campo de linha única: só a borda inferior, rótulo em caixa-alta acima.",
+      "html": "<div class=\"ds-campo-wrap\"><label class=\"ds-rotulo\" for=\"ds-whats\">WhatsApp</label><input id=\"ds-whats\" class=\"ds-campo\" placeholder=\"(11) 90000-0000\"></div>",
+      "css": ".ds-campo-wrap{background:#FFFFFF;padding:24px;font-family:Archivo, system-ui, sans-serif;} .ds-rotulo{display:block; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:#46566E;} .ds-campo{display:block; width:100%; border:0; border-bottom:1px solid rgba(11,20,36,0.25); background:transparent; padding:12px 0; font-family:inherit; font-size:17px; color:#0B1424; border-radius:0; font-variant-numeric:tabular-nums lining-nums;} .ds-campo::placeholder{color:#5E7391;} .ds-campo:focus{outline:none; border-bottom-color:#0A1628;} .ds-campo[aria-invalid=\"true\"]{border-bottom-color:#B91C1C;}"
+    },
+    {
+      "name": "Opção do formulário",
+      "kind": "chip",
+      "refersTo": "opcao",
+      "description": "Rádio em forma de caixa reta; marcada vira bloco azul-noite com check em ouro claro.",
+      "html": "<div class=\"ds-opcoes\"><label class=\"ds-opcao\"><input type=\"radio\" name=\"ds-perfil\" checked><span>Empresa <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg></span></label><label class=\"ds-opcao\"><input type=\"radio\" name=\"ds-perfil\"><span>Pessoa física <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg></span></label></div>",
+      "css": ".ds-opcoes{display:grid; grid-template-columns:1fr 1fr; gap:8px; background:#FFFFFF; padding:24px; font-family:Archivo, system-ui, sans-serif;} .ds-opcao{cursor:pointer;} .ds-opcao input{position:absolute; opacity:0; width:1px; height:1px;} .ds-opcao span{display:flex; min-height:48px; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border:1px solid rgba(11,20,36,0.15); font-size:15px; color:#0B1424; transition:border-color .15s, background-color .15s, color .15s;} .ds-opcao span svg{color:#E3C887; opacity:0;} .ds-opcao:hover span{border-color:#1B3354;} .ds-opcao input:checked + span{background:#0A1628; border-color:#0A1628; color:#FFFFFF;} .ds-opcao input:checked + span svg{opacity:1;} .ds-opcao input:focus-visible + span{outline:2px solid #C8A45C; outline-offset:2px;}"
+    },
+    {
+      "name": "Cabeçalho",
+      "kind": "nav",
+      "refersTo": "cabecalho",
+      "description": "Barra fixa azul-noite com logo, links de âncora (desktop) e botão claro compacto.",
+      "html": "<header class=\"ds-cab\"><span class=\"ds-cab-logo\">MERAKTOS</span><nav class=\"ds-cab-nav\"><a href=\"#\">Operações</a><a href=\"#\">Como funciona</a><a href=\"#\">Helena Santos</a></nav><a href=\"#\" class=\"ds-cab-btn\">Solicitar análise</a></header>",
+      "css": ".ds-cab{display:flex; align-items:center; justify-content:space-between; gap:24px; height:72px; padding:0 40px; background:rgba(5,11,21,0.95); border-bottom:1px solid rgba(255,255,255,0.1); font-family:Archivo, system-ui, sans-serif;} .ds-cab-logo{color:#C8A45C; font-weight:600; letter-spacing:0.2em; font-size:14px;} .ds-cab-nav{display:flex; gap:36px; font-size:15px;} .ds-cab-nav a{color:rgba(255,255,255,0.75); text-decoration:none; transition:color .15s;} .ds-cab-nav a:hover{color:#FFFFFF;} .ds-cab-nav a:focus-visible, .ds-cab-btn:focus-visible{outline:2px solid #C8A45C; outline-offset:3px;} .ds-cab-btn{display:inline-flex; align-items:center; min-height:44px; padding:0 20px; background:#FFFFFF; color:#050B15; font-size:14px; font-weight:600; letter-spacing:0.01em; text-decoration:none; transition:background-color .3s;} .ds-cab-btn:hover{background:#F2F4F7;}"
+    },
+    {
+      "name": "Linha de operação",
+      "kind": "custom",
+      "refersTo": "linha-operacao",
+      "description": "Assinatura do sistema: série em linhas com fio, inteira clicável, seta que avança no hover.",
+      "html": "<ul class=\"ds-ops\"><li><button type=\"button\" class=\"ds-op\"><span><span class=\"ds-op-nome\">Capital de giro</span><span class=\"ds-op-txt\">Caixa para operar e crescer, com prazo e garantia ajustados ao ciclo do negócio.</span></span><span class=\"ds-op-cta\">Solicitar <span class=\"ds-op-seta\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></span></span></button></li><li><button type=\"button\" class=\"ds-op\"><span><span class=\"ds-op-nome\">Home equity</span><span class=\"ds-op-txt\">Crédito com o seu imóvel como garantia, em prazo longo.</span></span><span class=\"ds-op-cta\">Solicitar <span class=\"ds-op-seta\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></span></span></button></li></ul>",
+      "css": ".ds-ops{list-style:none; margin:0; padding:24px 32px; background:#F2F4F7; font-family:Archivo, system-ui, sans-serif;} .ds-ops li{border-bottom:1px solid #D8DEE7;} .ds-op{display:grid; grid-template-columns:1fr auto; gap:16px; align-items:start; width:100%; padding:24px 0; background:transparent; border:0; text-align:left; cursor:pointer; font-family:inherit; color:#0B1424; transition:background-color .15s;} .ds-op:hover{background:rgba(255,255,255,0.6);} .ds-op:focus-visible{outline:2px solid #C8A45C; outline-offset:3px;} .ds-op-nome{display:block; font-size:1.25rem; font-weight:600; letter-spacing:-0.025em; font-variation-settings:'wdth' 92;} .ds-op-txt{display:block; margin-top:4px; font-size:15px; line-height:1.625; color:#46566E;} .ds-op-cta{display:flex; align-items:center; gap:6px; margin-top:4px; font-size:14px; font-weight:600; color:#1B3354; white-space:nowrap;} .ds-op-seta{display:inline-flex; transition:transform .3s;} .ds-op:hover .ds-op-seta{transform:translateX(4px);}"
+    },
+    {
+      "name": "Bloco com fio de ouro",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Princípio ou etapa: fio de ouro de 1px no topo, título e texto; nunca card.",
+      "html": "<div class=\"ds-fio-wrap\"><div class=\"ds-fio\"><h3><span class=\"ds-fio-num\">1</span>Diagnóstico</h3><p>Entendo o objetivo, o caixa e as garantias disponíveis. A análise inicial não tem custo.</p></div></div>",
+      "css": ".ds-fio-wrap{background:#FFFFFF; padding:32px; font-family:Archivo, system-ui, sans-serif;} .ds-fio{border-top:1px solid #C8A45C; padding-top:24px; max-width:280px;} .ds-fio h3{margin:0; font-size:1.5rem; font-weight:600; letter-spacing:-0.025em; color:#0B1424; font-variation-settings:'wdth' 92;} .ds-fio-num{margin-right:8px; color:#8A6A2A; font-variant-numeric:tabular-nums lining-nums;} .ds-fio p{margin:12px 0 0; line-height:1.625; color:#46566E;}"
+    },
+    {
+      "name": "Números de prova",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Estatísticas confirmadas em numeral tabular ouro envelhecido, sob fio de ouro.",
+      "html": "<dl class=\"ds-nums\"><div><dt>anos em bancos</dt><dd>15+</dd></div><div><dt>pessoas atendidas</dt><dd>300+</dd></div></dl>",
+      "css": ".ds-nums{display:grid; grid-template-columns:1fr 1fr; max-width:512px; margin:0; border-top:1px solid #C8A45C; background:#F2F4F7; font-family:Archivo, system-ui, sans-serif;} .ds-nums div{display:flex; flex-direction:column; padding:24px;} .ds-nums div:first-child{border-right:1px solid rgba(11,20,36,0.15); padding-left:0;} .ds-nums dt{font-size:14px; color:#46566E;} .ds-nums dd{order:-1; margin:0; font-size:2.25rem; font-weight:600; letter-spacing:-0.025em; color:#8A6A2A; font-variant-numeric:tabular-nums lining-nums; font-variation-settings:'wdth' 80;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Outro Lado da Mesa",
+    "overview": "O sistema fala como a área de private de um banco de investimento brasileiro: azul-noite institucional, papel frio, um único metal (ouro) usado com parcimônia de joalheiro, e uma única família grotesca que ganha autoridade comprimindo a largura, não aumentando o volume. A Helena passou quinze anos do lado do comitê de crédito; o visual traduz isso em precisão e discrição. Nada pisca, nada tem sombra, nada é arredondado. A confiança vem da régua: fios de 1px, numerais tabulares, colunas alinhadas, espaço generoso entre blocos.\n\nA página alterna bandas noturnas (abertura, tese, pedido de análise, rodapé) com bandas claras de conteúdo (operações, processo, retrato). A fotografia é real e noturna (Faria Lima/Pinheiros vista do alto, sob véu azul-noite) e o retrato da Helena é a única figura humana. Movimento é raro e lento: a foto de abertura assenta, o título sobe, e um realce dourado breve confirma quando uma operação escolhida na lista chega preenchida ao formulário. Tudo respeita `prefers-reduced-motion`.",
+    "keyCharacteristics": [
+      "Azul-noite domina abertura, tese, formulário e rodapé; branco e cinza-gelo frios carregam o conteúdo.",
+      "Ouro só como fio de 1px, numeral, foco e pequenos sinais de estado; nunca como preenchimento de área.",
+      "Uma família (Archivo) em larguras contrastantes: títulos condensados (`wdth` 70), texto em largura normal.",
+      "Listas em linhas com fios, nunca cards com ícone.",
+      "Cantos retos em tudo; o único círculo é o retrato da Helena na assinatura.",
+      "Plano: sem sombras; profundidade por bandas tonais e pelo véu sobre a foto."
+    ],
+    "rules": [
+      {
+        "name": "The Fio de Ouro Rule",
+        "body": "O ouro entra como linha, número, foco ou sinal de estado pequeno. Nunca preenche botão, banda, card ou fundo de seção; sua raridade é o que o faz parecer metal.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ouro Certo Rule",
+        "body": "Ouro Meraktos e Ouro Claro só sobre azul-noite ou como fio; sobre branco ou gelo, número em ouro é sempre Ouro Envelhecido.",
+        "section": "colors"
+      },
+      {
+        "name": "The Uma Família de Azul Rule",
+        "body": "Todo neutro é azulado e frio. Não introduza cinza neutro, bege ou outro matiz de acento.",
+        "section": "colors"
+      },
+      {
+        "name": "The Largura Antes do Peso Rule",
+        "body": "Hierarquia se faz comprimindo (`wdth` 70 → 80 → 92 → 100) com peso fixo em 600 para títulos. Não suba para 700/800 nem use itálico para destacar.",
+        "section": "typography"
+      },
+      {
+        "name": "The Numeral Tabular Rule",
+        "body": "Todo número que o visitante compara ou lê como dado (índices de etapa, estatísticas, telefone, WhatsApp no formulário) usa algarismos tabulares e alinhados.",
+        "section": "typography"
+      },
+      {
+        "name": "The Linha, Não Card Rule",
+        "body": "Conteúdo em série (operações, princípios, etapas, garantias, números) é apresentado em linhas separadas por fios, nunca em cards com ícone. Um fio no topo substitui a caixa.",
+        "section": "layout"
+      },
+      {
+        "name": "The Plano Rule",
+        "body": "Nenhuma superfície flutua. Se algo precisa se destacar, muda de banda ou ganha um fio; não ganha sombra.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Canto Reto Rule",
+        "body": "Raio zero em tudo. Pílulas, cantos suaves e cards arredondados pertencem a outro mundo.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** manter o azul-noite nas bandas de abertura, tese, pedido e rodapé, e branco/gelo no conteúdo (The Uma Família de Azul Rule).",
+      "**Do** usar ouro como fio de 1px, numeral, foco ou sinal pequeno de estado (The Fio de Ouro Rule); sobre fundo claro, numeral em Ouro Envelhecido.",
+      "**Do** criar hierarquia pelo eixo de largura do Archivo, com títulos em 600 e `wdth` 70.",
+      "**Do** usar algarismos tabulares em todo número lido como dado.",
+      "**Do** apresentar séries como linhas com fio no topo ou entre itens.",
+      "**Do** manter alvos de toque com pelo menos 44px (botões e opções com 48px).",
+      "**Do** registrar a origem de toda imagem no `.json` ao lado dela em `public/img/`."
+    ],
+    "donts": [
+      "**Don't** usar ouro como preenchimento de botão, faixa ou fundo.",
+      "**Don't** usar cards com ícone, depoimentos em carrossel ou blocos arredondados para listar serviços.",
+      "**Don't** arredondar cantos ou usar pílulas; o único círculo é o retrato na assinatura.",
+      "**Don't** aplicar sombras; destaque se faz por banda tonal ou fio.",
+      "**Don't** introduzir uma segunda família tipográfica nem fonte de sistema como display.",
+      "**Don't** colocar sobretítulos ou \"eyebrows\" acima dos títulos de seção; o rótulo em caixa-alta é exclusivo dos campos do formulário."
+    ],
+    "provenance": "Direção escolhida pelo usuário na pergunta estruturada: padrão da categoria, régua BTG Pactual, XP Private, Itaú Private. .impeccable/questions/3b1e9876.answer.json (challenger-painel) é anterior e está desatualizado.",
+    "pending": [
+      "Retrato da Helena é foto informal; um ensaio profissional elevaria o registro."
+    ]
+  }
+}

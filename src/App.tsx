@@ -1,67 +1,59 @@
-import { Briefcase, Car, Compass, Home, Instagram, RefreshCcw } from "lucide-react";
-import { HELENA_INSTAGRAM, linkWhatsApp } from "../lib/lead.js";
-import { Formulario } from "./Formulario";
+import { useState } from "react";
+import { ArrowRight, Instagram } from "lucide-react";
+import { HELENA_INSTAGRAM, OBJETIVOS, linkWhatsApp } from "../lib/lead.js";
+import { Formulario, type Preselecao } from "./Formulario";
 import { IconeWhatsApp } from "./IconeWhatsApp";
 
-const WHATSAPP_DIRETO = linkWhatsApp("Olá, Helena! Vim pelo site e quero conversar sobre crédito.");
+const WHATSAPP_DIRETO = linkWhatsApp("Olá, Helena! Vim pelo site e gostaria de conversar sobre uma operação de crédito.");
 
-const destravar = [
-  { icone: Home, titulo: "Casa própria", texto: "Sair do aluguel com aprovação facilitada e a melhor taxa que o seu perfil alcança." },
-  { icone: Car, titulo: "Veículo", texto: "Financiar ou refinanciar o carro com segurança e sem juros abusivos." },
-  { icone: RefreshCcw, titulo: "Dívidas", texto: "Renegociar com os bancos, limpar o nome e voltar a respirar." },
-  { icone: Briefcase, titulo: "Empresa e MEI", texto: "Capital de giro e linhas que você nem sabia que existiam para o seu negócio." },
-  { icone: Compass, titulo: "Clareza", texto: "Entender a sua situação financeira de verdade, sem enrolação." },
-];
+type Perfil = keyof typeof OBJETIVOS;
+type Operacao = { nome: string; texto: string };
 
-const servicosPF = [
-  "Crédito imobiliário e consórcio",
-  "Financiamento de veículos",
-  "Refinanciamento de veículos",
-  "Empréstimo consignado",
-  "Empréstimos pessoais",
-  "Renegociação de dívidas",
-  "Planejamento financeiro simples",
-];
+const operacoes: Record<Perfil, Operacao[]> = {
+  Empresa: [
+    { nome: "Capital de giro", texto: "Caixa para operar e crescer, com prazo e garantia ajustados ao ciclo do negócio." },
+    { nome: "BNDES, FGI ou FINAME", texto: "Linhas de fomento para investimento, máquinas e equipamentos." },
+    { nome: "Crédito com garantia de imóvel", texto: "Prazo longo e custo menor que o crédito sem garantia." },
+    { nome: "Auto equity", texto: "Crédito com a frota ou o veículo da empresa como garantia." },
+    { nome: "Antecipação de recebíveis", texto: "Vendas a prazo convertidas em caixa hoje." },
+    { nome: "Reestruturação de passivos bancários", texto: "Dívidas com bancos reorganizadas em prazo e custo que a operação suporta." },
+    { nome: "Consórcio ou seguro empresarial", texto: "Planejamento de aquisições e proteção do patrimônio da empresa." },
+  ],
+  "Pessoa física": [
+    { nome: "Financiamento de imóvel", texto: "Aquisição de imóvel residencial, inclusive de alto padrão." },
+    { nome: "Home equity", texto: "Crédito com o seu imóvel como garantia, em prazo longo." },
+    { nome: "Consórcio", texto: "Compra planejada de imóvel ou veículo sem os juros de um financiamento." },
+    { nome: "Financiamento ou refinanciamento de veículo", texto: "Compra ou crédito com o veículo quitado como garantia." },
+    { nome: "Reestruturação de passivos", texto: "Dívidas caras trocadas por uma estrutura que cabe no seu patrimônio." },
+  ],
+};
 
-const servicosPJ = [
-  "Capital de giro",
-  "Crédito com garantia de imóvel",
-  "Auto Equity (garantia em veículo)",
-  "Desconto de recebíveis",
-  "Linhas BNDES, FGI e FINAME",
-  "Renegociação com bancos",
-  "Consórcios e seguros empresariais",
-  "Consultoria financeira para MEI",
+const principios = [
+  { titulo: "Leio a operação como o comitê lê", texto: "Sei o que o banco pergunta antes de aprovar: garantia, fluxo de caixa, endividamento, histórico. Chegamos com as respostas prontas." },
+  { titulo: "Estruturo antes de pedir", texto: "Linha, prazo e garantia são definidos antes da proposta, e não depois da primeira recusa." },
+  { titulo: "Negocio e acompanho até a liberação", texto: "Fico do seu lado durante a negociação e todo o processo, até o crédito liberado." },
 ];
 
 const etapas = [
-  { titulo: "Análise gratuita", texto: "Você conta seu plano ou desafio. Eu avalio as possibilidades reais." },
-  { titulo: "Plano sob medida", texto: "Uma estratégia clara, viável e que cabe no seu bolso." },
-  { titulo: "Ação com orientação", texto: "Você executa com confiança, sabendo o que cada banco vai pedir." },
-  { titulo: "Acompanhamento", texto: "Eu sigo com você até a chave, o carro ou o crédito na mão." },
-];
-
-const depoimentos = [
-  { texto: "Achei que nunca sairia do aluguel. A Helena montou um plano comigo, buscou taxas melhores e em 6 meses eu estava com a chave na mão!", autor: "Luciana F.", meta: "Casa própria" },
-  { texto: "Depois de 5 anos tentando, finalmente consegui comprar meu carro com um financiamento justo e dentro das minhas possibilidades.", autor: "Carlos M.", meta: "Veículo" },
-  { texto: "Eu estava afogada em dívidas e sem esperança. A orientação da Helena me ajudou a renegociar tudo e hoje estou respirando novamente.", autor: "Mariana S.", meta: "Renegociação" },
-  { texto: "Como MEI, eu não conseguia crédito em lugar nenhum. A Helena encontrou soluções que nem sabia que existiam para o meu negócio.", autor: "Pedro A.", meta: "Crédito MEI" },
+  { titulo: "Diagnóstico", texto: "Entendo o objetivo, o caixa e as garantias disponíveis. A análise inicial não tem custo." },
+  { titulo: "Estruturação", texto: "Defino a linha, o prazo e a garantia que fazem sentido e preparo a documentação." },
+  { titulo: "Negociação", texto: "Apresento a operação às instituições e negocio as condições junto com você." },
+  { titulo: "Liberação", texto: "Acompanho até o crédito na conta e sigo disponível depois dele." },
 ];
 
 function Cabecalho() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-navy-900/95 backdrop-blur">
-      <div className="container flex h-16 items-center justify-between gap-4 md:h-20">
-        <a href="#inicio" aria-label="Meraktos Consultoria, início">
-          <img src="/img/logo-horizontal.png" alt="Meraktos Consultoria" width={450} height={125} className="h-9 w-auto md:h-11" />
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-noite-950/95">
+      <div className="container flex h-16 items-center justify-between gap-6 md:h-[72px]">
+        <a href="#inicio" aria-label="Meraktos Consultoria, início" className="shrink-0">
+          <img src="/img/logo-horizontal.png" alt="Meraktos Consultoria" width={450} height={125} className="h-9 w-auto md:h-10" />
         </a>
-        <nav aria-label="Principal" className="hidden items-center gap-8 text-[15px] font-medium text-white/80 lg:flex">
-          <a href="#solucoes" className="hover:text-gold-300">Soluções</a>
-          <a href="#como-funciona" className="hover:text-gold-300">Como funciona</a>
-          <a href="#helena" className="hover:text-gold-300">Quem é a Helena</a>
-          <a href="#depoimentos" className="hover:text-gold-300">Depoimentos</a>
+        <nav aria-label="Principal" className="hidden items-center gap-9 text-[15px] text-white/75 lg:flex">
+          <a href="#operacoes" className="transition-colors hover:text-white">Operações</a>
+          <a href="#como-funciona" className="transition-colors hover:text-white">Como funciona</a>
+          <a href="#helena" className="transition-colors hover:text-white">Helena Santos</a>
         </nav>
-        <a href="#analise" className="btn-gold min-h-11 px-5 text-[15px]">Análise gratuita</a>
+        <a href="#analise" className="btn-claro min-h-10 px-4 text-sm md:min-h-11 md:px-5">Solicitar análise</a>
       </div>
     </header>
   );
@@ -69,42 +61,36 @@ function Cabecalho() {
 
 function Hero() {
   return (
-    <section id="inicio" className="relative overflow-hidden bg-navy-900 text-white">
-      <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-gold-500/15 blur-3xl" />
-      <div className="container relative grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
-        <div>
-          <p className="eyebrow text-gold-400">Crédito com Helena</p>
-          <h1 className="mt-5 text-[2.6rem] font-medium leading-[1.05] sm:text-6xl lg:text-7xl">
-            Crédito como estratégia, <em className="font-normal text-gold-300">não como dívida.</em>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">
-            Foram mais de 15 anos dentro dos bancos. Hoje eu fico do seu lado, como gerente exclusiva: casa, carro,
-            empresa ou dívida, eu mostro o caminho com clareza.
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a href="#analise" className="btn-gold">Quero minha análise gratuita</a>
-            <a href={WHATSAPP_DIRETO} className="btn-ghost">
-              <IconeWhatsApp className="h-5 w-5" /> Chamar no WhatsApp
-            </a>
-          </div>
-          <dl className="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-white/15 pt-8">
-            <div>
-              <dt className="text-sm text-white/60">dentro dos bancos</dt>
-              <dd className="order-first font-display text-4xl text-gold-300">+15 anos</dd>
-            </div>
-            <div>
-              <dt className="text-sm text-white/60">pessoas atendidas</dt>
-              <dd className="order-first font-display text-4xl text-gold-300">+300</dd>
-            </div>
-          </dl>
+    <section id="inicio" className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-noite-950 text-white">
+      <picture className="absolute inset-0 -z-20">
+        <source media="(max-width: 767px)" srcSet="/img/sao-paulo-noite-mobile.webp" />
+        <img src="/img/sao-paulo-noite.webp" alt="" width={2000} height={1126}
+          className="h-full w-full animate-assentar object-cover object-center" fetchPriority="high" />
+      </picture>
+      <div aria-hidden className="absolute inset-0 -z-10 bg-noite-900/30 mix-blend-multiply" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,11,21,0.94)_0%,rgba(5,11,21,0.74)_45%,rgba(5,11,21,0.12)_100%)] max-md:bg-[linear-gradient(0deg,rgba(5,11,21,0.97)_0%,rgba(5,11,21,0.82)_52%,rgba(5,11,21,0.15)_100%)]" />
+
+      <div className="container pb-12 pt-32 md:pb-20">
+        <h1 className="max-w-[15ch] animate-subir text-display font-semibold">
+          Crédito estruturado com quem conhece o banco por dentro.
+        </h1>
+        <p className="mt-7 max-w-[54ch] text-lede text-noite-300">
+          Passei mais de 15 anos dentro dos bancos. Hoje estruturo, negocio e acompanho operações de crédito para
+          empresas e para o patrimônio de quem as dirige.
+        </p>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a href="#analise" className="btn-claro">
+            Solicitar análise <ArrowRight className="h-4 w-4" aria-hidden />
+          </a>
+          <a href={WHATSAPP_DIRETO} className="btn-contorno">
+            <IconeWhatsApp className="h-5 w-5" /> Conversar no WhatsApp
+          </a>
         </div>
-        <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
-          <div className="overflow-hidden rounded-t-full border border-gold-500/50 p-2">
-            <img src="/img/helena.jpg" alt="Helena Santos, consultora de crédito da Meraktos" width={788} height={786}
-              className="aspect-[4/5] w-full rounded-t-full object-cover object-top" fetchPriority="high" />
-          </div>
-          <p className="absolute -bottom-4 left-1/2 w-max -translate-x-1/2 rounded-full bg-paper px-5 py-2 text-sm font-semibold text-navy-900 shadow-lg">
-            Helena Santos · Personal Banker
+        <div className="mt-14 flex items-center gap-4 border-t border-ouro/60 pt-6">
+          <img src="/img/helena.webp" alt="" width={788} height={786} className="h-14 w-14 rounded-full object-cover object-top" />
+          <p className="text-[15px] leading-snug">
+            <span className="block font-semibold text-white">Helena Santos</span>
+            <span className="text-noite-300">Personal Banker · Meraktos Consultoria</span>
           </p>
         </div>
       </div>
@@ -112,48 +98,57 @@ function Hero() {
   );
 }
 
-function Destravar() {
+function Tese() {
   return (
-    <section id="solucoes" className="py-20 md:py-28">
-      <div className="container">
-        <p className="eyebrow text-gold-700">O que dá para destravar</p>
-        <h2 className="mt-4 max-w-2xl text-4xl font-medium leading-tight md:text-5xl">Cada sonho tem um caminho de crédito certo.</h2>
-        <ul className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-5">
-          {destravar.map(({ icone: Icone, titulo, texto }) => (
-            <li key={titulo} className="bg-paper p-6 lg:p-7">
-              <Icone className="h-7 w-7 text-gold-700" strokeWidth={1.6} aria-hidden />
-              <h3 className="mt-5 text-2xl font-medium">{titulo}</h3>
-              <p className="mt-2 leading-relaxed text-ink-soft">{texto}</p>
-            </li>
+    <section aria-labelledby="tese" className="bg-noite-900 py-24 text-white md:py-32">
+      <div className="container grid gap-14 lg:grid-cols-[0.9fr_1.6fr] lg:gap-20">
+        <h2 id="tese" className="max-w-[12ch] text-titulo font-semibold">Quinze anos do outro lado da mesa.</h2>
+        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+          {principios.map((p) => (
+            <div key={p.titulo} className="border-t border-ouro pt-6">
+              <h3 className="text-xl font-semibold leading-snug tracking-tight">{p.titulo}</h3>
+              <p className="mt-3 leading-relaxed text-noite-300">{p.texto}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
 }
 
-function Servicos() {
-  const coluna = (titulo: string, sigla: string, itens: string[]) => (
-    <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-ink/5 sm:p-8">
-      <p className="eyebrow text-gold-700">{sigla}</p>
-      <h3 className="mt-2 text-3xl font-medium">{titulo}</h3>
-      <ul className="mt-6 divide-y divide-ink/10">
-        {itens.map((item) => (
-          <li key={item} className="flex items-baseline gap-3 py-3">
-            <span aria-hidden className="h-1.5 w-1.5 shrink-0 translate-y-[-2px] rounded-full bg-gold-500" />
-            {item}
+function Operacoes({ escolher }: { escolher: (perfil: Perfil, objetivo: string) => void }) {
+  const coluna = (perfil: Perfil, titulo: string) => (
+    <div>
+      <h3 className="border-b border-tinta pb-4 text-2xl font-semibold" style={{ fontVariationSettings: '"wdth" 80' }}>{titulo}</h3>
+      <ul>
+        {operacoes[perfil].map((op) => (
+          <li key={op.nome} className="border-b border-gelo-linha">
+            <button type="button" onClick={() => escolher(perfil, op.nome)}
+              className="group grid w-full grid-cols-[1fr_auto] items-start gap-4 py-5 text-left transition-colors hover:bg-white/60 md:py-6">
+              <span>
+                <span className="block text-lg font-semibold tracking-tight md:text-xl">{op.nome}</span>
+                <span className="mt-1 block text-[15px] leading-relaxed text-tinta-suave">{op.texto}</span>
+              </span>
+              <span className="mt-1 flex items-center gap-1.5 text-sm font-semibold text-noite-700">
+                <span className="hidden whitespace-nowrap sm:inline">Solicitar</span>
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+              </span>
+            </button>
           </li>
         ))}
       </ul>
     </div>
   );
   return (
-    <section className="bg-paper-alt py-20 md:py-28">
+    <section id="operacoes" aria-labelledby="titulo-operacoes" className="bg-gelo py-24 md:py-32">
       <div className="container">
-        <h2 className="max-w-2xl text-4xl font-medium leading-tight md:text-5xl">Soluções sob medida, para você e para a sua empresa.</h2>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {coluna("Para você", "Pessoa física", servicosPF)}
-          {coluna("Para a sua empresa", "Pessoa jurídica", servicosPJ)}
+        <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+          <h2 id="titulo-operacoes" className="max-w-[16ch] text-titulo font-semibold">Operações que eu estruturo</h2>
+          <p className="max-w-sm text-tinta-suave">Escolha uma operação e a sua solicitação já começa com ela preenchida.</p>
+        </div>
+        <div className="mt-14 grid gap-14 lg:grid-cols-2 lg:gap-16">
+          {coluna("Empresa", "Para empresas")}
+          {coluna("Pessoa física", "Para você e seu patrimônio")}
         </div>
       </div>
     </section>
@@ -162,16 +157,17 @@ function Servicos() {
 
 function ComoFunciona() {
   return (
-    <section id="como-funciona" className="py-20 md:py-28">
+    <section id="como-funciona" aria-labelledby="titulo-processo" className="py-24 md:py-32">
       <div className="container">
-        <p className="eyebrow text-gold-700">Como funciona</p>
-        <h2 className="mt-4 max-w-2xl text-4xl font-medium leading-tight md:text-5xl">Do primeiro “oi” até a conquista.</h2>
-        <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <h2 id="titulo-processo" className="max-w-[18ch] text-titulo font-semibold">Do diagnóstico ao crédito liberado</h2>
+        <ol className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {etapas.map((etapa, i) => (
-            <li key={etapa.titulo} className="border-t-2 border-navy-900 pt-6">
-              <span className="font-display text-5xl text-gold-500">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-4 text-2xl font-medium">{etapa.titulo}</h3>
-              <p className="mt-2 leading-relaxed text-ink-soft">{etapa.texto}</p>
+            <li key={etapa.titulo} className="border-t border-ouro pt-6">
+              <h3 className="text-2xl font-semibold tracking-tight">
+                <span className="tabular mr-2 text-ouro-escuro">{i + 1}</span>
+                {etapa.titulo}
+              </h3>
+              <p className="mt-3 max-w-[34ch] leading-relaxed text-tinta-suave">{etapa.texto}</p>
             </li>
           ))}
         </ol>
@@ -182,67 +178,64 @@ function ComoFunciona() {
 
 function Helena() {
   return (
-    <section id="helena" className="bg-navy-950 py-20 text-white md:py-28">
-      <div className="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-        <img src="/img/logo-vertical.png" alt="" width={747} height={447} className="mx-auto w-56 opacity-90 md:w-72" loading="lazy" />
+    <section id="helena" aria-labelledby="titulo-helena" className="bg-gelo">
+      <div className="container grid gap-12 py-24 md:py-32 lg:grid-cols-[320px_1fr] lg:items-center lg:gap-20">
+        <figure className="w-full max-w-[320px] overflow-hidden">
+          <img src="/img/helena.webp" alt="Helena Santos" width={788} height={786} loading="lazy"
+            className="aspect-[4/5] w-full origin-top scale-[1.18] object-cover object-[50%_8%]" />
+        </figure>
         <div>
-          <p className="eyebrow text-gold-400">Quem está por trás da Meraktos</p>
-          <blockquote className="mt-5 font-display text-3xl leading-snug md:text-4xl">
-            “Pode me chamar de <span className="text-gold-300">Severina das Finanças</span>: faço um pouco de tudo, mas faço tudo com alma.”
-          </blockquote>
-          <div className="mt-8 space-y-4 text-lg leading-relaxed text-white/80">
+          <h2 id="titulo-helena" className="text-titulo font-semibold">Helena Santos</h2>
+          <p className="mt-2 text-lg text-tinta-suave">Personal Banker à frente da Meraktos Consultoria</p>
+          <div className="mt-8 max-w-[60ch] space-y-5 text-lede text-tinta-suave">
             <p>
-              Sou a <strong className="text-white">Helena Santos</strong>, consultora com mais de 15 anos de mercado bancário. Como
-              Personal Banker, ajudo pessoas e empresas a reorganizar a vida financeira e a conseguir o crédito certo.
+              Foram mais de 15 anos no mercado bancário atendendo pessoas e empresas. Hoje faço o caminho inverso: uso o
+              que aprendi dentro do banco para defender o lado do cliente.
             </p>
-            <p>Vou desde limpar o nome até a assinatura do contrato do seu primeiro imóvel, sempre do seu lado da mesa.</p>
+            <p>
+              Vou do diagnóstico à assinatura do contrato, e sigo junto depois dele. No mercado, me chamam de “Severina das
+              Finanças”: faço um pouco de tudo, e faço tudo com alma.
+            </p>
           </div>
+          <dl className="mt-12 grid max-w-lg grid-cols-2 border-t border-ouro">
+            <div className="flex flex-col border-r border-tinta/15 py-6 pr-6">
+              <dt className="text-sm text-tinta-suave">anos em bancos</dt>
+              <dd className="tabular order-first text-4xl font-semibold tracking-tight text-ouro-escuro" style={{ fontVariationSettings: '"wdth" 80' }}>15+</dd>
+            </div>
+            <div className="flex flex-col py-6 pl-6">
+              <dt className="text-sm text-tinta-suave">pessoas atendidas</dt>
+              <dd className="tabular order-first text-4xl font-semibold tracking-tight text-ouro-escuro" style={{ fontVariationSettings: '"wdth" 80' }}>300+</dd>
+            </div>
+          </dl>
+          <a href={`https://www.instagram.com/${HELENA_INSTAGRAM}/`} target="_blank" rel="noopener noreferrer"
+            className="mt-4 inline-flex min-h-11 items-center gap-2 text-[15px] text-tinta-suave underline decoration-tinta/25 hover:text-tinta">
+            <Instagram className="h-4 w-4" aria-hidden /> @{HELENA_INSTAGRAM}
+          </a>
         </div>
       </div>
     </section>
   );
 }
 
-function Depoimentos() {
+function Analise({ preselecao }: { preselecao: Preselecao | null }) {
   return (
-    <section id="depoimentos" className="py-20 md:py-28">
-      <div className="container">
-        <p className="eyebrow text-gold-700">Depoimentos</p>
-        <h2 className="mt-4 max-w-2xl text-4xl font-medium leading-tight md:text-5xl">Quem confiou, conquistou.</h2>
-        <ul className="mt-12 grid gap-6 md:grid-cols-2">
-          {depoimentos.map((d) => (
-            <li key={d.autor} className="flex flex-col justify-between rounded-3xl bg-white p-7 shadow-sm ring-1 ring-ink/5">
-              <p className="font-display text-xl leading-relaxed">“{d.texto}”</p>
-              <p className="mt-6 text-[15px] text-ink-soft">
-                <strong className="font-semibold text-ink">{d.autor}</strong> · {d.meta} · São Paulo/SP
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-function Analise() {
-  return (
-    <section id="analise" className="relative overflow-hidden bg-navy-900 py-20 text-white md:py-28">
-      <div aria-hidden className="pointer-events-none absolute -bottom-48 -left-40 h-[32rem] w-[32rem] rounded-full bg-gold-500/10 blur-3xl" />
-      <div className="container relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="lg:sticky lg:top-28">
-          <p className="eyebrow text-gold-400">Análise gratuita</p>
-          <h2 className="mt-4 text-4xl font-medium leading-tight md:text-5xl">Vamos dar o primeiro passo?</h2>
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/80">
-            Responda quatro perguntas e o seu pedido abre direto no meu WhatsApp. Sem custo, sem enrolação: só verdade e
-            experiência.
+    <section id="analise" aria-labelledby="titulo-analise" className="bg-noite-900 py-24 text-white md:py-32">
+      <div className="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <h2 id="titulo-analise" className="text-titulo font-semibold">Solicite sua análise</h2>
+          <p className="mt-6 max-w-[44ch] text-lede text-noite-300">
+            Conte o essencial da operação. A solicitação abre no meu WhatsApp já escrita, e eu retorno pessoalmente.
           </p>
-          <ul className="mt-8 space-y-3 text-white/85">
-            <li className="flex gap-3"><span className="text-gold-400">—</span> Resposta em até 24 horas</li>
-            <li className="flex gap-3"><span className="text-gold-400">—</span> Conversa direta com a Helena, sem robô no meio</li>
-            <li className="flex gap-3"><span className="text-gold-400">—</span> Você só segue se fizer sentido para você</li>
+          <ul className="mt-10 max-w-sm divide-y divide-white/15 border-y border-white/15 text-[15px] text-white/90">
+            <li className="py-4">Análise inicial sem custo</li>
+            <li className="py-4">Conversa direta com a Helena</li>
+            <li className="py-4">Sem promessa de aprovação: a decisão é sempre da instituição</li>
           </ul>
+          <a href={WHATSAPP_DIRETO} className="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-white underline decoration-white/30 hover:decoration-ouro-claro">
+            <IconeWhatsApp className="h-5 w-5" /> Prefiro conversar direto
+          </a>
         </div>
-        <Formulario />
+        <Formulario preselecao={preselecao} />
       </div>
     </section>
   );
@@ -250,59 +243,57 @@ function Analise() {
 
 function Rodape() {
   return (
-    <footer className="bg-navy-950 pb-28 pt-14 text-white/70 md:pb-14">
-      <div className="container flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-        <div>
-          <img src="/img/logo-horizontal.png" alt="Meraktos Consultoria" width={450} height={125} className="h-10 w-auto" loading="lazy" />
-          <p className="mt-4 max-w-xs">Transformando sonhos em realidade financeira.</p>
-        </div>
-        <ul className="flex flex-col gap-3 sm:flex-row sm:gap-8">
+    <footer className="bg-noite-950 py-14 text-noite-300">
+      <div className="container flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+        <img src="/img/logo-horizontal.png" alt="Meraktos Consultoria" width={450} height={125} className="h-10 w-auto self-start" loading="lazy" />
+        <ul className="flex flex-col gap-2 text-[15px] sm:flex-row sm:gap-8">
           <li>
-            <a href={WHATSAPP_DIRETO} className="inline-flex min-h-11 items-center gap-2 hover:text-gold-300">
-              <IconeWhatsApp className="h-5 w-5 text-gold-400" /> (11) 93299-0106
+            <a href={WHATSAPP_DIRETO} className="tabular inline-flex min-h-11 items-center gap-2 hover:text-white">
+              <IconeWhatsApp className="h-4 w-4 text-noite-300" /> (11) 93299-0106
             </a>
           </li>
           <li>
-            <a href={`https://www.instagram.com/${HELENA_INSTAGRAM}/`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 hover:text-gold-300">
-              <Instagram className="h-5 w-5 text-gold-400" aria-hidden /> @{HELENA_INSTAGRAM}
+            <a href={`https://www.instagram.com/${HELENA_INSTAGRAM}/`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 hover:text-white">
+              <Instagram className="h-4 w-4 text-noite-300" aria-hidden /> @{HELENA_INSTAGRAM}
             </a>
           </li>
         </ul>
       </div>
-      <p className="container mt-10 border-t border-white/10 pt-6 text-sm text-white/50">
-        © {new Date().getFullYear()} Meraktos Consultoria. Análise de crédito sujeita às condições de cada instituição.
-      </p>
+      <div className="container mt-10">
+        <div className="flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-noite-300 md:flex-row md:justify-between">
+        <p>© {new Date().getFullYear()} Meraktos Consultoria. Análise e aprovação de crédito sujeitas às políticas de cada instituição financeira.</p>
+        <p>Foto de São Paulo: Maick Maciel / Unsplash</p>
+        </div>
+      </div>
     </footer>
   );
 }
 
-function BotaoFlutuante() {
-  return (
-    <a href={WHATSAPP_DIRETO} aria-label="Falar com a Helena no WhatsApp"
-      className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold-400 text-navy-950 shadow-xl shadow-black/30 transition-transform hover:scale-105 md:bottom-6 md:right-6">
-      <IconeWhatsApp className="h-7 w-7" />
-    </a>
-  );
-}
-
 export default function App() {
+  const [preselecao, setPreselecao] = useState<Preselecao | null>(null);
+
+  function escolher(perfil: Perfil, objetivo: string) {
+    setPreselecao((atual) => ({ perfil, objetivo, vez: (atual?.vez ?? 0) + 1 }));
+    // No desktop a seção inteira cabe; em telas estreitas o formulário fica abaixo do texto.
+    const largo = window.matchMedia("(min-width: 1024px)").matches;
+    document.getElementById(largo ? "analise" : "formulario-analise")?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
     <>
-      <a href="#analise" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-gold-400 focus:px-4 focus:py-2 focus:text-navy-950">
-        Ir para a análise gratuita
+      <a href="#analise" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:text-noite-950">
+        Ir para a solicitação de análise
       </a>
       <Cabecalho />
       <main>
         <Hero />
-        <Destravar />
-        <Servicos />
+        <Tese />
+        <Operacoes escolher={escolher} />
         <ComoFunciona />
         <Helena />
-        <Depoimentos />
-        <Analise />
+        <Analise preselecao={preselecao} />
       </main>
       <Rodape />
-      <BotaoFlutuante />
     </>
   );
 }

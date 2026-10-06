@@ -7,50 +7,75 @@
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
+    scrollbar-color: #5e7391 #050b15;
   }
   body {
-    @apply bg-paper font-sans text-base text-ink antialiased;
+    @apply bg-white font-sans text-base text-tinta antialiased;
+    font-variation-settings: "wdth" 100;
     overflow-x: hidden;
+    caret-color: #c8a45c;
   }
-  h1, h2, h3 {
-    @apply font-display tracking-tight;
-    font-optical-sizing: auto;
+  ::selection {
+    background: #e3c887;
+    color: #050b15;
+  }
+  h1, h2 {
+    font-variation-settings: "wdth" 70;
+    text-wrap: balance;
+  }
+  h3 {
+    font-variation-settings: "wdth" 92;
     text-wrap: balance;
   }
   p {
     text-wrap: pretty;
   }
+  a {
+    text-underline-offset: 0.22em;
+  }
   :focus-visible {
-    @apply outline-none ring-2 ring-gold-400 ring-offset-2 ring-offset-navy-900;
+    outline: 2px solid #c8a45c;
+    outline-offset: 3px;
+  }
+  /* Em fundo claro o ouro some (2,3:1); o anel passa a azul-noite. */
+  .bg-white :focus-visible,
+  .bg-gelo :focus-visible {
+    outline-color: #0a1628;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
     *, *::before, *::after {
-      transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
     }
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-base font-semibold transition-colors;
+    @apply inline-flex min-h-12 items-center justify-center gap-2.5 px-6 text-[15px] font-semibold tracking-[0.01em] transition-[background-color,color,border-color,box-shadow] duration-300;
   }
-  .btn-gold {
-    @apply btn bg-gold-400 text-navy-950 hover:bg-gold-300;
+  .btn-claro {
+    @apply btn bg-white text-noite-950 hover:bg-gelo;
   }
-  .btn-ghost {
-    @apply btn border border-white/25 text-white hover:border-gold-400 hover:text-gold-300;
+  .btn-contorno {
+    @apply btn border border-white/30 text-white hover:border-ouro-claro hover:text-ouro-claro;
   }
-  .eyebrow {
-    @apply text-sm font-semibold uppercase tracking-[0.18em];
+  .btn-noite {
+    @apply btn bg-noite-900 text-white hover:bg-noite-700;
   }
   .campo {
-    @apply block w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-base text-ink placeholder:text-ink/40 focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-gold-400/60;
+    @apply block w-full border-0 border-b border-tinta/25 bg-transparent px-0 py-3 text-[17px] text-tinta placeholder:text-noite-500 focus:border-noite-900 focus:shadow-[0_1px_0_0_#0A1628] focus:outline-none focus:ring-0;
   }
   .campo[aria-invalid="true"] {
     @apply border-red-700;
+  }
+  .rotulo {
+    @apply block text-[13px] font-semibold uppercase tracking-[0.12em] text-tinta-suave;
   }
 }

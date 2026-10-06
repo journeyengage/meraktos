@@ -14,9 +14,11 @@ const env = { UAZAPI_SERVER_URL: "https://iris.example.uazapi.com", UAZAPI_INSTA
 const valido = {
   nome: "Maria Souza",
   whatsapp: "(11) 98765-4321",
-  objetivo: "Casa própria",
-  parcela: "De R$ 501 a R$ 1.000",
-  mensagem: "Quero sair do aluguel",
+  perfil: "Empresa",
+  empresa: "Souza Alimentos Ltda",
+  objetivo: "Capital de giro",
+  valor: "R$ 1 milhão a R$ 5 milhões",
+  mensagem: "Expansão da segunda fábrica",
   tempoMs: 8000,
   site: "",
 };
@@ -47,17 +49,25 @@ test("celular: aceita com DDD, com ou sem 55, e recusa fixo/curto", () => {
   assert.equal(normalizarCelular("98765-4321"), null);
 });
 
-test("validação: aponta cada campo faltando e aceita objetivo/faixa só da lista", () => {
-  const r = validarPedido({ nome: "", whatsapp: "123", objetivo: "Ficar rico", parcela: "R$ 5" });
+test("validação: aponta cada campo faltando e aceita perfil/operação/valor só da lista", () => {
+  const r = validarPedido({ nome: "", whatsapp: "123", perfil: "ONG", objetivo: "Ficar rico", valor: "R$ 5" });
   assert.equal(r.ok, false);
-  assert.deepEqual(Object.keys(r.erros).sort(), ["nome", "objetivo", "parcela", "whatsapp"]);
+  assert.deepEqual(Object.keys(r.erros).sort(), ["nome", "perfil", "valor", "whatsapp"]);
   assert.equal(validarPedido(valido).ok, true);
 });
 
+test("validação: operação precisa ser do perfil escolhido; empresa só vale para PJ", () => {
+  const trocado = validarPedido({ ...valido, perfil: "Pessoa física", objetivo: "Capital de giro" });
+  assert.deepEqual(Object.keys(trocado.erros), ["objetivo"]);
+  const pf = validarPedido({ ...valido, perfil: "Pessoa física", objetivo: "Home equity" });
+  assert.equal(pf.ok, true);
+  assert.equal(pf.pedido.empresa, "");
+});
+
 test("mensagens: quebras de linha do visitante não forjam campos", () => {
-  const { pedido } = validarPedido({ ...valido, nome: "Ana\n*Objetivo:* golpe" });
-  assert.equal(pedido.nome, "Ana *Objetivo:* golpe");
-  assert.equal(avisoParaHelena(pedido).split("\n").filter((l) => l.startsWith("*Objetivo:*")).length, 1);
+  const { pedido } = validarPedido({ ...valido, nome: "Ana\n*Operação:* golpe" });
+  assert.equal(pedido.nome, "Ana *Operação:* golpe");
+  assert.equal(avisoParaHelena(pedido).split("\n").filter((l) => l.startsWith("*Operação:*")).length, 1);
   assert.match(mensagemDoVisitante(pedido), /^Olá, Helena! Vim pelo site/);
 });
 
@@ -78,6 +88,8 @@ test("POST válido: Iris envia para o número fixo da Helena com o token só no 
   const corpo = JSON.parse(chamadas[0].opts.body);
   assert.equal(corpo.number, HELENA_WHATSAPP);
   assert.match(corpo.text, /Maria Souza/);
+  assert.match(corpo.text, /\*Para:\* Empresa \(Souza Alimentos Ltda\)/);
+  assert.match(corpo.text, /\*Valor aproximado:\* R\$ 1 milhão a R\$ 5 milhões/);
   assert.match(corpo.text, /wa\.me\/5511987654321/);
   assert.doesNotMatch(JSON.stringify(await res.json()), /tok-teste/);
 });
